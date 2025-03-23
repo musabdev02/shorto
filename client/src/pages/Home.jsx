@@ -4,8 +4,11 @@ import Navbar from '../components/Home/Navbar'
 const Home = () => {
     return (
         <div>
-            <div className='max-w-6xl mx-auto px-4 h-[3.5rem] flex items-center'>
-                <Navbar />
+            <Navbar />
+            <div className='pt-[65px]'>
+                <main>
+                    
+                </main>
             </div>
         </div>
     )
