@@ -1,3 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
 @import "tailwindcss";
 *{font-family: "Bricolage Grotesque", sans-serif;}
+
+/* animations */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+    background-size: 300% 100%;
+    animation: gradientMove 3s ease infinite;
+}

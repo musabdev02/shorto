@@ -1,13 +1,14 @@
 import React from 'react'
-import Navbar from '../components/Home/Navbar'
 // components
+import Navbar from '../components/Home/Navbar'
+import Hero from '../components/Home/Hero'
 const Home = () => {
     return (
         <div>
             <Navbar />
             <div className='pt-[65px]'>
                 <main>
-                    
+                    <Hero />
                 </main>
             </div>
         </div>

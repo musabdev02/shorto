@@ -1,7 +1,7 @@
 import React from 'react'
 // icons
 import { FaArrowRight } from "react-icons/fa6";
-const Button = ({ type }) => {
+const Button = ({ type, content }) => {
     return (
         <>
         {
@@ -12,7 +12,7 @@ const Button = ({ type }) => {
             ):
             (
                 <button className='flex items-center gap-2 px-4 py-2 font-medium text-sm shadow-xs rounded-md cursor-pointer bg-zinc-800 text-zinc-300'>
-                    Sign up
+                    {content}
                     <span><FaArrowRight /></span>
                 </button>
             )
