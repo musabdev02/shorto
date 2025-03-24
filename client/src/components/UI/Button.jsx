@@ -7,7 +7,7 @@ const Button = ({ type, content }) => {
         {
             type === "primary" ? (
                 <button className=' border border-[#e5e5e5] font-medium px-4 py-2 rounded-md text-zinc-800 text-sm cursor-pointer shadow-xs hover:bg-zinc-100'>
-                Sign in
+                {content}
             </button>
             ):
             (
