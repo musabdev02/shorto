@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
+// cus
+import { useAlert } from '../../contexts/Alert';
 // icons
 import { FaLink } from "react-icons/fa6";
 
 import Button from '../UI/Button';
 const Hero = () => {
+    const { showAlert } = useAlert();
+    const [loading, setLoading] = useState(false)
+    const handleSubmit = () => {
+        showAlert("URL is required!", "error");
+        setLoading(true);
+    }
     return (
         <div className='w-full'>
             <div className='max-w-6xl p-4 mx-auto'>
@@ -20,12 +28,21 @@ const Hero = () => {
                                 <span className='text-gray-600'><FaLink /></span>
                                 <input type="text" placeholder='Enter your link here...' className='outline-none w-full' />
                             </div>
-                            <Button type={"secondary"} />
+                            <div>
+                                {
+                                    loading ? <div className='bg-zinc-500 h-8 w-12 p-2 rounded-md'>
+                                    <img src="/loading.svg" alt="L  oading" className='w-full h-full'/>
+                                    </div>:
+                                    <span
+                                    onClick={handleSubmit}
+                                    ><Button type={"secondary"} /></span>
+                                }
+                            </div>
+                          
                         </div>
                         <p className='mt-2 text-xs text-red-700'>Registor to take full control over your links*</p>
                     </div>
                     <div className='mt-20'>
-
                     </div>
                 </div>
             </div>
