@@ -1,19 +1,23 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Rlr from "../components/Rlr"
 const Redirector = () => {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
     const handleRedirector = async () => {
-      const res = await fetch(`http://localhost:3000/api/url${location.pathname}`);
-      const data = await res.json();
-      if(data.status === "ok"){
-        window.location.href = data.url;
-      }else{
-        navigate("/");
+      try {
+        const res = await fetch(`http://localhost:3000/api/url${location.pathname}`);
+        const data = await res.json();
+        if (data.status === "ok") {
+          window.location.href = data.url;
+        } else {
+          navigate("/");
+        }
+      } catch (err) {
+        console.log("somthing went wrong", err);
       }
+
     };
     handleRedirector();
   }, [])
