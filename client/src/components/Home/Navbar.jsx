@@ -17,7 +17,7 @@ const Navbar = () => {
                     {/* cta */}
                     <div className='flex items-center gap-2'>
                       <Link to={"/login"}><Button type={"primary"} content={"Sign in"} /></Link>
-                      <Link to={"/register"}><Button type={"secondary"} content={"Sign up"} /></Link>  
+                      <Link to={"/register"} className='hidden sm:block'><Button type={"secondary"} content={"Sign up"} /></Link>  
                     </div>
                 </div>
             </div>

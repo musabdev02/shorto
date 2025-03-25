@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 const Register = () => {
   return (
     <Rlr>
-      <div className='w-[40%] bg-white shadow-md p-4 rounded-md'>
-        <h3 className='font-semibold text-3xl'>Sign Up</h3>
-        <p className='text-gray-500 w-[70%] mt-2 leading-5'>Don't think about it, do it!</p>
+      <div className='sm:w-[40%] w-full bg-white shadow-md p-4 rounded-md'>
+        <h3 className='font-semibold text-2xl sm:text-3xl'>Sign Up</h3>
+        <p className='text-gray-500 text-sm sm:text-md w-[70%] mt-2 leading-5'>Don't think about it, do it!</p>
         <form className='text-left mt-4'>
           <div className='flex flex-col'>
             <label htmlFor="name" className='text-gray-700 mb-2'>Name:</label>

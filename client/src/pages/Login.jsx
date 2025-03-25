@@ -6,9 +6,9 @@ import Rlr from '../components/Rlr'
 const Login = () => {
   return (
     <Rlr>
-      <div className='w-[40%] bg-white shadow-md p-4 rounded-md'>
-        <h3 className='font-semibold text-3xl'>Welcome Back,</h3>
-        <p className='text-gray-500 w-[70%] mt-2 leading-5'>Login your account to take all control over your links.</p>
+      <div className='sm:w-[40%] bg-white shadow-md p-4 rounded-md'>
+        <h3 className='font-semibold text-2xl sm:text-3xl'>Welcome Back,</h3>
+        <p className='text-gray-500 text-sm sm:text-md w-[70%] mt-2 leading-4 sm:leading-5'>Login your account to take all control over your links.</p>
         <form className='text-left mt-4'>
           <div className='flex flex-col'>
             <label htmlFor="email" className='text-gray-700 mb-2'>Email:</label>
