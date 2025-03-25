@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom"
 // cus
 import { useAlert } from '../../contexts/Alert';
 // component
@@ -9,7 +10,7 @@ const Url = () => {
     const { showAlert } = useAlert();
     const [url, setUrl] = useState("");
     const [loading, setLoading] = useState(false);
-
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,14 +35,20 @@ const Url = () => {
         try{
             const res = await fetch(`http://localhost:3000/api/url`, {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify({ url }),
             });
             const data = await res.json();
-            console.log(data);
+            if(data.status === "ok"){
+                navigate("/shortener", { state: data });
+            }
             setLoading(false);
         }catch(err) {
             console.log("something went wrong", err);
             setLoading(false);
+            setUrl("");
         }
 
     }
