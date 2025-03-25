@@ -1,21 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 // icons
-import { FaLink } from 'react-icons/fa6';
 import { IoMdLink } from "react-icons/io";
 // compoents
 import Button from '../components/UI/Button';
+import Logo from '../components/Logo';
 
 const Shortener = () => {
     return (
         <div>
             <div className='max-w-6xl mx-auto px-4'>
-                <Link to={"/"} className='flex items-center justify-center gap-2 h-24'>
-                    <div className='rounded-md h-8 w-8 shadow-sm bg-white'>
-                        <img src="/logo.svg" alt="logo" className='w-full h-full' />
-                    </div>
-                    <h3 className='font-medium text-xl'>Shorto</h3>
-                </Link>
+                <Logo />
                 <div className='w-full h-[70vh] flex items-center justify-center'>
                     <div className='w-[50%] text-center'>
                         <h3 className='text-5xl font-semibold'>Your Shortener Link.</h3>

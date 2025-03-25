@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 // compoennts
 import Button from '../UI/Button'
 const Navbar = () => {
@@ -15,7 +16,7 @@ const Navbar = () => {
                     </div>
                     {/* cta */}
                     <div className='flex items-center gap-2'>
-                        <Button type={"primary"} />
+                      <Link to={"/login"}><Button type={"primary"} content={"Sign in"} /></Link>
                         <Button type={"secondary"} content={"Sign up"} />
                     </div>
                 </div>
