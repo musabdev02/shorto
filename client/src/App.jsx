@@ -6,6 +6,9 @@ import Shortener from './pages/Shortener';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Redirector from './pages/Redirector';
+import Dashboard from './pages/Dashboard';
+// dashboard pages
+import Links from './pages/Dasboardpages/Links';
 const App = () => {
   return (
     <BrowserRouter>
@@ -15,6 +18,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/:shortId" element={<Redirector />} />
+        {/* Dashboard with nested routes */}
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route index element={<Links />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
