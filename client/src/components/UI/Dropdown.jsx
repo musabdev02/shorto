@@ -26,10 +26,13 @@ const DropMenu = ({ isOpen, dropdownRef, options }) => {
                     {options.map((option, index) => (
                         <button
                             key={index}
-                            className="cursor-pointer flex items-center px-4 py-2 w-full hover:bg-gray-100 text-left"
+                            className="cursor-pointer  px-4 py-2 w-full hover:bg-gray-100 text-left"
                             onClick={option.onClick}
                         >
-                            {option.icon} {option.label}
+                            <div className="flex items-center gap-2">
+                                <span className={` ${option.label.toLowerCase() === "delete" ? "text-red-400" : "text-gray-800"} text-lg `}>{option.icon}</span>
+                                <span className={` ${option.label.toLowerCase() === "delete" ? "text-red-400" : "text-gray-900"}`}>{option.label}</span>
+                            </div>
                         </button>
                     ))}
                 </div>
