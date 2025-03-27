@@ -9,6 +9,7 @@ import Redirector from './pages/Redirector';
 import Dashboard from './pages/Dashboard';
 // dashboard pages
 import Links from './pages/Dasboardpages/Links';
+import Analytics from './pages/Dasboardpages/Analytics';
 const App = () => {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ const App = () => {
         {/* Dashboard with nested routes */}
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<Links />} />
+          <Route path="analytics" element={<Analytics />} />
         </Route>
       </Routes>
     </BrowserRouter>

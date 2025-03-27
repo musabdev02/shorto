@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 // icons
 import { FiLink } from "react-icons/fi";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
@@ -7,15 +8,18 @@ import { FaUserAltSlash } from "react-icons/fa";
 const links = [
     {
         icon: <FiLink />,
-        name: "Links"
+        name: "Links",
+        desti: "/dashboard"
     },
     {
         icon: <TbBrandGoogleAnalytics />,
-        name: "Analytics"
+        name: "Analytics",
+        desti: "/dashboard/analytics"
     },
     {
         icon: <CiSettings />,
-        name: "Settings"
+        name: "Settings",
+        desti: "/dashboard/settings"
     },
     {
         name: "Logout"
@@ -34,10 +38,10 @@ const Sidebar = () => {
             <div className='mt-4 p-4 flex flex-col gap-3'>
                 {
                     links.map((item, index) => (
-                        <div className='flex items-center gap-2 cursor-pointer hover:bg-gray-200 p-1 rounded-md'>
+                        <Link to={item.desti} className='flex items-center gap-2 cursor-pointer hover:bg-gray-200 p-1 rounded-md'>
                             <span className='text-md text-gray-800'> {item.icon} </span>
                             <h4 className='text-gray-800'>{item.name}</h4>
-                        </div>
+                        </Link>
                     ))
                 }
 
