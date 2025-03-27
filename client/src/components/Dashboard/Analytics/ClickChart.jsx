@@ -6,11 +6,12 @@ const ClickChart = ({ data }) => {
     <div className="w-full h-full">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data}>
-          <XAxis dataKey="time" axisLine={false} tickLine={false} />
+          <XAxis dataKey="time" axisLine={false} fontSize={12} tickLine={false} />
 
-          <YAxis domain={[0, "dataMax + 1"]} axisLine={false} tickLine={false} />
+          <YAxis domain={[0, "dataMax + 1"]} axisLine={false} fontSize={12} tickLine={false} />
 
           <Tooltip />
+          
           <Line 
             type="monotone" 
             dataKey="clicks" 
