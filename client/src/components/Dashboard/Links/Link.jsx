@@ -22,7 +22,7 @@ const Link = ({ gridLayout }) => {
     return (
         <div className={`flex ${gridLayout ? "w-[48%]" : "w-full"} flex-row space-y-0 rounded-lg p-4 transition-all hover:shadow-[0_20px_35px_-15px_rgba(0,0,0,0.1)] items-center border border-gray-300 justify-between`}>
             <div className='flex items-center gap-4'>
-                <div className='h-8 w-8 flex items-center justify-center rounded-lg p-1 border-gray-300 overflow-hidden border bg-gray-50'>
+                <div className='hidden sm:flex h-8 w-8 items-center justify-center rounded-lg p-1 border-gray-300 overflow-hidden border bg-gray-50'>
                     <img src="https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://linkedin.com&size=64" alt="icon" className='w-full h-full' />
                 </div>
                 <div className='flex flex-col gap-2'>

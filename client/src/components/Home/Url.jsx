@@ -45,8 +45,8 @@ const Url = () => {
                 navigate("/shortener", { state: data });
             }
             setLoading(false);
-        }catch(err) {
-            console.log("something went wrong", err);
+        }catch(err) { 
+            showAlert(`Error: ${err.message}`, "error");
             setLoading(false);
             setUrl("");
         }
