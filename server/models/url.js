@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-const urlSchema = mongoose.Schema({
-    shortId:{
+const urlSchema = new mongoose.Schema({
+    shortId: {
         type: String,
         required: true,
         unique: true
@@ -10,10 +10,12 @@ const urlSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    visitHistory: [
-        {timestamp: Number}
-    ]
-});
+    createdAt: { 
+        type: Date, 
+        default: Date.now, 
+        expires: 120 
+    }
+}, { timestamps: true });
 
 const URL = mongoose.model("urls", urlSchema);
 

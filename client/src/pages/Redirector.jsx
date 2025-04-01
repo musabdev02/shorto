@@ -15,7 +15,7 @@ const Redirector = () => {
           navigate("/");
         }
       } catch (err) {
-        console.log("somthing went wrong", err);
+        navigate("/")
       }
 
     };

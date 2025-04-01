@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 // cus
-import { useAlert } from '../../contexts/Alert';
+import { useAlert } from '../../../contexts/Alert';
 // component
-import Button from '../UI/Button';
+import Button from '../../UI/Button';
+import Btnloading from '../../UI/Btnloading';
 // icons
 import { FaLink } from "react-icons/fa6";
 const Url = () => {
@@ -61,9 +62,7 @@ const Url = () => {
             </div>
             <div>
                 {
-                    loading ? <div className='bg-zinc-500 h-8 w-12 p-2 rounded-md'>
-                        <img src="/loading.svg" alt="L  oading" className='w-full h-full' />
-                    </div> :
+                    loading ? <Btnloading /> :
                         <span><Button type={"secondary"} /></span>
                 }
             </div>

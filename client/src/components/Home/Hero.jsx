@@ -1,5 +1,5 @@
 import React from 'react'
-import Url from './Url'
+import Url from './Hero/Url'
 
 
 const Hero = () => {
