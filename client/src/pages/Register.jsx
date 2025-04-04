@@ -55,7 +55,7 @@ const Register = () => {
       });
       const data = await res.json();
       if (data?.status === "ok") {
-        navigate("/")
+        navigate("/login")
       }else{
         setLoading(false)
         showAlert("Something went wrong", "error");

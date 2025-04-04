@@ -1,7 +1,8 @@
 import USER from "../models/user.js";
 import bcrypt from "bcrypt";
+import { setUser } from "../service/auth.js";
 
-const handleCreateUser = async (req, res) => {
+const handleCreateUser = async (req, res) => {  
     const { name, email, password } = req.body;
 
     const user = await USER.findOne({ email });
@@ -27,8 +28,38 @@ const handleCreateUser = async (req, res) => {
         });
 
     } catch (err) {
-        res.status(400).end(`${err}`)
+        return res.status(500).json({ message: "Internal server error" });
     }
 };
 
-export { handleCreateUser };
+const handleVerifyUser = async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ message: "Email & Password are required!" });
+    }
+
+    try {
+       
+        const user = await USER.findOne({ email });
+        if (!user) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+
+        const isPassCorrect = await bcrypt.compare(password, user.password);
+        if (!isPassCorrect) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+
+        const token = setUser(user);
+
+        return res.status(200).json({
+            status: "ok",
+            token,
+        });
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+export { handleCreateUser, handleVerifyUser };
