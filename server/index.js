@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 // other
 import connectToDb from "./connect.js";
 import urlRouter from "./routes/url.js";
@@ -13,10 +14,11 @@ connectToDb(process.env.MONGO_URL_LOCAL);
 
 app.use(cors({
     origin: "http://localhost:5173",
-    credentials: "true"
+    credentials: true
 }));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
+app.use(cookieParser());
 // routers
 app.use("/api/url", urlRouter);
 app.use("/api/user", userRouter);

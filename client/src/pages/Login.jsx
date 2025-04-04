@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // components
 import { useAlert } from '../contexts/Alert';
 import Button from '../components/UI/Button'
@@ -11,6 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const cleanUp = () =>{
     setEmail("");
@@ -29,6 +30,7 @@ const Login = () => {
     try {
       const res = await fetch(`http://localhost:3000/api/user/verify`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -37,7 +39,7 @@ const Login = () => {
       const data = await res.json();
 
       if(data?.status === "ok"){
-        console.log(data)
+        navigate("/dashboard");
       }else{
         showAlert(`${data.message}`, "error");
       }
