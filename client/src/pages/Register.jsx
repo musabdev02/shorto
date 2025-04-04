@@ -17,12 +17,33 @@ const Register = () => {
     setName("");
     setEmail("");
     setPassword("");
-  }
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name && !email && !password) {
-      showAlert("Please check all fields", "error")
+
+    if (!name || !email || !password) {
+      showAlert("Please fill in all fields", "error");
+      return;
     };
+    if (!validateEmail(email)) {
+      showAlert("Please enter a valid email address", "error");
+      return;
+    };
+    if (!validatePassword(password)) {
+      showAlert("Password must be at least 8 characters long", "error");
+      return;
+    };
+
     setLoading(true)
     try {
       const res = await fetch(`http://localhost:3000/api/user`, {
@@ -33,8 +54,7 @@ const Register = () => {
         body: JSON.stringify({ name, email, password })
       });
       const data = await res.json();
-      console.log(data);
-      if (data.status === "ok") {
+      if (data?.status === "ok") {
         navigate("/")
       }else{
         setLoading(false)

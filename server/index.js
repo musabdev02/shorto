@@ -3,7 +3,8 @@ import express from "express";
 import cors from "cors";
 // other
 import connectToDb from "./connect.js";
-import urlRouter from "./routes/url.js"
+import urlRouter from "./routes/url.js";
+import userRouter from "./routes/user.js";
 dotenv.config();
 
 const app = express();
@@ -18,6 +19,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 // routers
 app.use("/api/url", urlRouter);
-
+app.use("/api/user", userRouter);
 
 app.listen(PORT, ()=> console.log(`Server started at port: ${PORT}`));
