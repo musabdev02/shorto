@@ -1,6 +1,6 @@
 import USER from "../models/user.js";
 import bcrypt from "bcrypt";
-import { setUser } from "../service/auth.js";
+import { setUser, getUser } from "../service/auth.js";
 
 const handleCreateUser = async (req, res) => {  
     const { name, email, password } = req.body;
@@ -67,4 +67,23 @@ const handleVerifyUser = async (req, res) => {
     }
 };
 
-export { handleCreateUser, handleVerifyUser };
+const handleGetProfile = async (req, res) => {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ message: "Unauthorized" });
+    const userEmail = getUser(token);
+    if(!userEmail) return res.status(401).json({ message: "Unauthorized" });
+    
+    try {
+      const user = await USER.findOne({
+            email: userEmail.email
+        });
+        return res.status(200).json({
+            status: "ok",
+            user
+        });
+
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+export { handleCreateUser, handleVerifyUser, handleGetProfile };

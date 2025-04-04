@@ -45,7 +45,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       }, [isOpen, setIsOpen]);
 
     return (
-        <div ref={sidebarRef} className={`z-9 fixed shadow-lg transform ${isOpen ? "-translate-x-0": "-translate-x-100"} sm:translate-none  transition-all ease-in-out sm:shadow-none sm:block sm:sticky top-0 w-[16rem] bg-[#fafafa] h-screen border-r border-r-[#e5e7eb]`}>
+        <div ref={sidebarRef} className={`z-9 fixed shadow-lg transform ${isOpen ? "-translate-x-0": "-translate-x-100"} sm:translate-none  transition-all ease-in-out sm:shadow-none sm:block sm:sticky top-0 w-[16rem] bg-[#fafafa] h-screen border-r border-r-[#e5e7eb] overflow-hidden`}>
             <div className='p-4 flex items-center gap-2'>
                 <div className='rounded-md h-7 w-7 shadow-sm bg-white'>
                     <img src="/logo.svg" alt="logo" className='w-full h-full' />
