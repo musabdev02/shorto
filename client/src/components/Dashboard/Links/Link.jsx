@@ -8,20 +8,24 @@ import { IoIosReturnRight } from "react-icons/io";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { SlOptionsVertical } from "react-icons/sl";
 import { IoIosLink } from "react-icons/io";
-import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-
+// helper
+import { deletelink } from '../../../helper';
 const Link = ({ gridLayout, item }) => {
     const { showAlert } = useAlert();
     const { isOpen, toggleDropdown, dropdownRef } = useDropdown();
 
     const menuOptions = [
          { label: "Copy link", icon: <IoIosLink />, onClick: () => copyToClipboard(`http://localhost:5173/${item.shortId}`) },
-         { label: "Delete", icon: <MdDeleteOutline />, onClick: () => alert("Grid Layout Clicked") },
+         { label: "Delete", icon: <MdDeleteOutline />, onClick: () => removeLink() },
     ];
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
         showAlert("Copied to clipboard!", "success");
+    };
+    const removeLink = () => {
+        deletelink(item._id);
+        showAlert("Link Deleted Sucessfully", "success");
     };
 
     return (

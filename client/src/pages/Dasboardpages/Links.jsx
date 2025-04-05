@@ -39,7 +39,6 @@ const Links = () => {
                     },
                 });
                 const data = await res.json();
-                console.log(data);
                 if(data?.status === "ok"){
                     if(data?.links.length > 0){
                        setHasLinks(true);
