@@ -1,9 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import Button from '../UI/Button';
 import Url from './Hero/Url'
 
 
 const Hero = () => {
-    
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
     return (
         <div className='w-full'>
             <div className='max-w-6xl p-4 mx-auto'>
@@ -15,8 +17,15 @@ const Hero = () => {
                             Magic!
                         </h2>
                         <p className='mt-4 sm:mt-6 leading-4 sm:leading-5 text-zinc-700 text-sm sm:text-md'>Shorto is an efficient and easy-to-use URL shortening service that streamlines your online experience.</p>
-                        <Url />
-                        <p className='mt-2 text-xs text-red-700'>Registor to take full control over your links*</p>
+                        {
+                            isLoggedIn ? <Link to={"/dashboard"} className='w-fit mx-auto flex mt-4'><Button type={"secondary"} content={"Dashboard"} /></Link>:
+                            <>
+                             <Url />
+                             <p className='mt-2 text-xs text-red-700'>Registor to take full control over your links*</p>
+                            </>
+                        }
+                       
+                       
                     </div>
                     <div className='mt-20'>
                     </div>

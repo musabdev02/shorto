@@ -40,6 +40,8 @@ const Login = () => {
 
       if(data?.status === "ok"){
         navigate("/dashboard");
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("name", data?.name);
       }else{
         showAlert(`${data.message}`, "error");
       }
