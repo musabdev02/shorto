@@ -1,12 +1,15 @@
 import mongoose from "mongoose"
 
 const userUrlScheme = mongoose.Schema({
-    shortUrl: {
+    comment: {
+        type: String,
+    },
+    shortId: {
         type: String,
         required: true,
         unique: true
     },
-    originalUrl: {
+    redirectUrl: {
         type: String,
         required: true,
     },
@@ -16,7 +19,6 @@ const userUrlScheme = mongoose.Schema({
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "users",
-        required: true
     }
 }, { timestamps: true });
 
