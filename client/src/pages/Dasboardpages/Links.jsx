@@ -18,6 +18,7 @@ const Links = () => {
     const [isGrid, setIsGrid] = useState(false);
     const [loading, setLoading] = useState(true);
     const [isForm, setForm] = useState(false);
+    const [userLinks, setUserLinks] = useState([]);
     const { isOpen, toggleDropdown, dropdownRef } = useDropdown();
     const menuOptions = [
         { label: "Grid Layout", icon: <FiGrid />, onClick: () => handleGridLayout() },
@@ -38,19 +39,23 @@ const Links = () => {
                     },
                 });
                 const data = await res.json();
+                console.log(data);
                 if(data?.status === "ok"){
-                    showAlert(`Fetched Data Sucessfully!`, "success")
+                    if(data?.links.length > 0){
+                       setHasLinks(true);
+                    }
+                    setUserLinks(data?.links);
                 }
                 else{
                     navigate("/")
                 }
-                setLoading(false)
+                setLoading(false);
             } catch (error) {
                 showAlert(`Error: ${error.message}`, "error");
             }
         }
         handleRequest();
-    }, [])
+    }, [isForm])
 
 
 
@@ -61,7 +66,7 @@ const Links = () => {
             <div className='mt-5 sm:mt-10 flex justify-end gap-2'>
                 <div className='flex border border-gray-300 px-4 gap-2 items-center rounded-md text-gray-700' title='Total Links'>
                     <PiLinkSimpleBold />
-                    0
+                    {userLinks.length}
                 </div>
                <span onClick={openForm}><Button content={"Create Link"} type={"secondary"} icon={"plus"} /></span>
                 <div className='hidden sm:flex border border-gray-300 items-center px-3 hover:bg-gray-100 text-gray-700 rounded-md
@@ -80,8 +85,11 @@ const Links = () => {
                 ) : hasLinks ? (
                     // Show links if available
                     <div className={`mt-8 flex ${isGrid ? "flex-row flex-wrap" : "flex-col"} gap-4`}>
-                        <Link gridLayout={isGrid} />
-                        <Link gridLayout={isGrid} />
+                        {
+                            userLinks.slice(0).reverse().map((item, index) => (
+                              <Link gridLayout={isGrid} key={index} item={item} />
+                            ))
+                        }
                     </div>
                 ) : (
                     <div className='h-[65vh] flex items-center justify-center flex-col gap-2'>

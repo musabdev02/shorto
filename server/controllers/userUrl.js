@@ -4,7 +4,7 @@ import userURL from "../models/userUrl.js";
 
 const handleCreateUrl = async (req, res) => {
     const { originalUrl,  comment} = req.body;
-    if(!originalUrl || !comment) return res.status(401).json({message: "Unauthroized"});
+    if(!originalUrl) return res.status(401).json({message: "Unauthroized"});
     let shortId;
     let isUnique = false;
 

@@ -1,5 +1,6 @@
-import USER from "../models/user.js";
 import bcrypt from "bcrypt";
+import USER from "../models/user.js";
+import userURL from "../models/userUrl.js";
 import { setUser, getUser } from "../service/auth.js";
 
 const handleCreateUser = async (req, res) => {  
@@ -75,12 +76,13 @@ const handleGetProfile = async (req, res) => {
     if(!userEmail) return res.status(401).json({ message: "Unauthorized" });
     
     try {
-      const user = await USER.findOne({
+        const user = await USER.findOne({
             email: userEmail.email
         });
+        const associatedLinks = await userURL.find({ createdBy: user._id });
         return res.status(200).json({
             status: "ok",
-            user
+            links: associatedLinks
         });
 
     } catch (error) {
