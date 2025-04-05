@@ -61,6 +61,7 @@ const handleVerifyUser = async (req, res) => {
 
         return res.status(200).json({
             status: "ok",
+            name: user.name
         });
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });
@@ -85,5 +86,15 @@ const handleGetProfile = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });
     }
+};
+
+const handleLogoutProfile = async (req, res) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax"
+    });
+    return res.status(200).json({status: "ok"})
 }
-export { handleCreateUser, handleVerifyUser, handleGetProfile };
+
+export { handleCreateUser, handleVerifyUser, handleGetProfile, handleLogoutProfile };

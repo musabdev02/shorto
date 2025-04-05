@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 // components
 import { useAlert } from '../contexts/Alert';
@@ -12,6 +12,13 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  useEffect(() => {
+    if(isLoggedIn){
+      navigate("/dashboard");
+    }
+  }, [])
 
   const cleanUp = () =>{
     setName("");

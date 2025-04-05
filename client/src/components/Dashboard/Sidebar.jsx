@@ -5,6 +5,8 @@ import { FiLink } from "react-icons/fi";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { CiSettings } from "react-icons/ci";
 import { FaUserAltSlash } from "react-icons/fa";
+// helper
+import { logoutRq } from '../../helper';
 const links = [
     {
         icon: <FiLink />,
@@ -22,7 +24,9 @@ const links = [
         desti: "/dashboard/settings"
     },
     {
-        name: "Logout"
+        name: "Logout",
+        desti: "/",
+        func: () => logoutRq()
     }
 ]
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -58,7 +62,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                     links.map((item, index) => (
                         <Link to={item.desti} key={index} className='flex items-center gap-2 cursor-pointer hover:bg-gray-200 p-1 rounded-md'>
                             <span className='text-md text-gray-800'> {item.icon} </span>
-                            <h4 className='text-gray-800'>{item.name}</h4>
+                            <h4 className='text-gray-800' onClick={item.func}>{item.name}</h4>
                         </Link>
                     ))
                 }
