@@ -3,25 +3,29 @@ import { useNavigate } from 'react-router-dom';
 // component
 import { useAlert } from '../../contexts/Alert';
 import Button from "../../components/UI/Button"
+import Link from '../../components/Dashboard/Links/Link';
+import Form from "../../components/Dashboard/Links/Form";
 import { DropMenu, useDropdown } from "../../components/UI/Dropdown"
 // icons
 import { SlOptionsVertical } from "react-icons/sl";
 import { PiLinkSimpleBold } from "react-icons/pi";
 import { FiGrid } from "react-icons/fi";
 import { PiCodesandboxLogoThin } from "react-icons/pi";
-import Link from '../../components/Dashboard/Links/Link';
 const Links = () => {
     const { showAlert } = useAlert();
     const navigate = useNavigate();
     const [hasLinks, setHasLinks] = useState(false);
     const [isGrid, setIsGrid] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isForm, setForm] = useState(false);
     const { isOpen, toggleDropdown, dropdownRef } = useDropdown();
     const menuOptions = [
         { label: "Grid Layout", icon: <FiGrid />, onClick: () => handleGridLayout() },
     ];
     // functions
     const handleGridLayout = () => { isGrid ? setIsGrid(false) : setIsGrid(true); };
+    const openForm = () => {setForm(true)};
+    const closeForm = () => {setForm(false)};
 
     useEffect(() => {
         const handleRequest = async () => {
@@ -52,14 +56,14 @@ const Links = () => {
 
 
     return (
-        <div>
+        <div className=''>
             <h3 className='text-xl font-medium'>Links</h3>
             <div className='mt-5 sm:mt-10 flex justify-end gap-2'>
-                <div className='flex border border-gray-300 px-4 gap-2 items-center rounded-md text-gray-700'>
+                <div className='flex border border-gray-300 px-4 gap-2 items-center rounded-md text-gray-700' title='Total Links'>
                     <PiLinkSimpleBold />
-                    02
+                    0
                 </div>
-                <Button content={"Create Link"} type={"secondary"} icon={"plus"} />
+               <span onClick={openForm}><Button content={"Create Link"} type={"secondary"} icon={"plus"} /></span>
                 <div className='hidden sm:flex border border-gray-300 items-center px-3 hover:bg-gray-100 text-gray-700 rounded-md
                  cursor-pointer text-sm' onClick={toggleDropdown}>
                     <SlOptionsVertical />
@@ -91,6 +95,7 @@ const Links = () => {
 
 
             </div>
+            { isForm && <Form closeForm={closeForm}/>}
         </div>
     )
 }

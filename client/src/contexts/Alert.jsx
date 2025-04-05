@@ -20,7 +20,7 @@ export const AlertProvider = ({ children }) => {
   return (
     <AlertContext.Provider value={{ showAlert }}>
       {children}
-      <div className="fixed bottom-5 right-5 space-y-2">
+      <div className="fixed bottom-5 right-5 space-y-2 z-99">
         {alerts.map((alert) => (
           <Alert
             key={alert.id}
