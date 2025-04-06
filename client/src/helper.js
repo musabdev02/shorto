@@ -1,5 +1,5 @@
 
-const logoutRq = async () => {
+const logoutRq = async (callback) => {
     try {
         const res = await fetch(`http://localhost:3000/api/user/logout`, {
             method: "GET",
@@ -12,13 +12,14 @@ const logoutRq = async () => {
         if (data?.status === "ok") {
             localStorage.removeItem("isLoggedIn");
             localStorage.removeItem("name");
+            callback();
         }
     } catch (error) {
         console.log(error);
     };
 };
 
-const deletelink = async (shortId) => {
+const deletelink = async (shortId, callback) => {
 
     try {
         const res = await fetch(`http://localhost:3000/api/user/url/`, {
@@ -29,6 +30,10 @@ const deletelink = async (shortId) => {
             },
             body: JSON.stringify({ shortId })
         });
+        const data = await res.json();
+        if(data?.status === "ok"){
+            callback();
+        }
     } catch (error) {
         console.log(error);
     }

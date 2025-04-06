@@ -11,7 +11,7 @@ import { IoIosLink } from "react-icons/io";
 import { MdDeleteOutline } from "react-icons/md";
 // helper
 import { deletelink } from '../../../helper';
-const Link = ({ gridLayout, item }) => {
+const Link = ({ gridLayout, item, callback }) => {
     const { showAlert } = useAlert();
     const { isOpen, toggleDropdown, dropdownRef } = useDropdown();
 
@@ -22,10 +22,12 @@ const Link = ({ gridLayout, item }) => {
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
         showAlert("Copied to clipboard!", "success");
+        if(isOpen){toggleDropdown()};
     };
     const removeLink = () => {
-        deletelink(item._id);
+        deletelink(item._id, callback);
         showAlert("Link Deleted Sucessfully", "success");
+        toggleDropdown()
     };
 
     return (

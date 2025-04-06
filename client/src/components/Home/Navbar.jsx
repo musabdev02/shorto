@@ -8,8 +8,6 @@ const Navbar = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     const name = localStorage.getItem("name");
 
-
-
     return (
         <div className='fixed left-0 top-0 z-50 border-b border-gray-200 bg-transparent backdrop-blur-md w-full'>
             <div className='max-w-6xl mx-auto px-4 h-[3.5rem] flex items-center'>

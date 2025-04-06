@@ -11,6 +11,7 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { PiLinkSimpleBold } from "react-icons/pi";
 import { FiGrid } from "react-icons/fi";
 import { PiCodesandboxLogoThin } from "react-icons/pi";
+import { CiBoxList } from "react-icons/ci";
 const Links = () => {
     const { showAlert } = useAlert();
     const navigate = useNavigate();
@@ -18,15 +19,27 @@ const Links = () => {
     const [isGrid, setIsGrid] = useState(false);
     const [loading, setLoading] = useState(true);
     const [isForm, setForm] = useState(false);
+    const [refresh, setRefresh] = useState(false);
     const [userLinks, setUserLinks] = useState([]);
     const { isOpen, toggleDropdown, dropdownRef } = useDropdown();
+    
     const menuOptions = [
-        { label: "Grid Layout", icon: <FiGrid />, onClick: () => handleGridLayout() },
-    ];
+        {
+          label: isGrid ? "List Layout" : "Grid Layout",
+          icon: isGrid ? <CiBoxList /> : <FiGrid />,
+          onClick: () => handleGridLayout()
+        }
+      ];
     // functions
-    const handleGridLayout = () => { isGrid ? setIsGrid(false) : setIsGrid(true); };
+    const triggerUpdate = () => setRefresh(prev => !prev);
+    const handleGridLayout = () => { 
+        toggleDropdown();
+        isGrid ? setIsGrid(false) : setIsGrid(true);
+    };
     const openForm = () => {setForm(true)};
     const closeForm = () => {setForm(false)};
+
+
 
     useEffect(() => {
         const handleRequest = async () => {
@@ -42,6 +55,8 @@ const Links = () => {
                 if(data?.status === "ok"){
                     if(data?.links.length > 0){
                        setHasLinks(true);
+                    }else{
+                        setHasLinks(false);
                     }
                     setUserLinks(data?.links);
                 }
@@ -54,7 +69,7 @@ const Links = () => {
             }
         }
         handleRequest();
-    }, [isForm])
+    }, [isForm, refresh])
 
 
 
@@ -86,7 +101,7 @@ const Links = () => {
                     <div className={`mt-8 flex ${isGrid ? "flex-row flex-wrap" : "flex-col"} gap-4`}>
                         {
                             userLinks.slice(0).reverse().map((item, index) => (
-                              <Link gridLayout={isGrid} key={index} item={item} />
+                              <Link gridLayout={isGrid} key={index} callback={triggerUpdate} item={item} />
                             ))
                         }
                     </div>
