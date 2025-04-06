@@ -1,5 +1,5 @@
 
-const logoutRq = async (callback) => {
+const logoutRq = async () => {
     try {
         const res = await fetch(`http://localhost:3000/api/user/logout`, {
             method: "GET",
@@ -12,7 +12,6 @@ const logoutRq = async (callback) => {
         if (data?.status === "ok") {
             localStorage.removeItem("isLoggedIn");
             localStorage.removeItem("name");
-            callback();
         }
     } catch (error) {
         console.log(error);

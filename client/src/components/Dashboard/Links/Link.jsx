@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 // component
 import { DropMenu, useDropdown } from "../../UI/Dropdown"
 import { useAlert } from '../../../contexts/Alert';
@@ -14,8 +15,10 @@ import { deletelink } from '../../../helper';
 const Link = ({ gridLayout, item, callback }) => {
     const { showAlert } = useAlert();
     const { isOpen, toggleDropdown, dropdownRef } = useDropdown();
+    const navigate = useNavigate();
 
     const menuOptions = [
+         { label: "View Analytics", icon: <TbBrandGoogleAnalytics />, onClick: () => navigate("/dashboard/analytics") },
          { label: "Copy link", icon: <IoIosLink />, onClick: () => copyToClipboard(`http://localhost:5173/${item.shortId}`) },
          { label: "Delete", icon: <MdDeleteOutline />, onClick: () => removeLink() },
     ];

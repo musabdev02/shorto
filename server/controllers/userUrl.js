@@ -65,7 +65,25 @@ const handleDeleteUrl = async (req, res) => {
     }catch(err){
         return res.status(500).json({messaage: `${err}`});
     }
-}
+};
+
+const handleAnalyticsUrl = async (req, res) => {
+  const user = req.user;
+  if(!user) return res.status(401).json({message: "User is not found!"});
+  try{
+    const urls = await userURL.find({
+      createdBy: user.id
+    });
+    if(!urls) return res.status(404).json({message: "Urls is not found!"});
+    return res.status(200).json({
+      status: "ok",
+      urls,
+    });
+
+  }catch(err){
+    return res.status(500).json({message: `${err}`})
+   }
+};
 
 
-export { handleCreateUrl, handleViewUrl, handleDeleteUrl };
+export { handleCreateUrl, handleViewUrl, handleDeleteUrl, handleAnalyticsUrl };

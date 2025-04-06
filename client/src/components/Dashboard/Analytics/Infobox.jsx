@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Infobox = () => {
+const Infobox = ({ links }) => {
     const [active, setActive] = useState("short-links");
     const hoverClasses = "border border-gray-300 font-medium bg-white shadow-md text-black";
     let content;
@@ -14,20 +14,19 @@ const Infobox = () => {
                 <h3>Link</h3>
                 <span>Clicks</span>
             </div>
-            <div className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
-                <div className='flex items-center gap-1'>
-                    <img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" alt="" className='w-4' />
-                    <h4 className='text-sm text-gray-900 font-medium'>shorto.pk/RGo9DeH</h4>
-                </div>
-                <p className='font-medium text-sm text-gray-700'>03</p>
-            </div>
-            <div className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
-                <div className='flex items-center gap-1'>
-                    <img src="https://www.google.com/s2/favicons?domain=facebook.com&sz=64" alt="" className='w-4' />
-                    <h4 className='text-sm text-gray-900 font-medium'>shorto.pk/RGo9DeH</h4>
-                </div>
-                <p className='font-medium text-sm text-gray-700'>01</p>
-            </div>
+            {
+                links.map((item, index) => (
+                    <div key={index} className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
+                     <div className='flex items-center gap-2'>
+                    <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}`} alt={`favicon:${item.shortId}`} className='w-4' />
+                    <h4 className='text-sm text-gray-900 font-medium'>localhost:5173/{item.shortId}</h4>
+                     </div>
+                     <p className='font-medium text-sm text-gray-700'>{item.visitHistory.length}</p>
+                   </div>
+                ))
+            }
+            
+            
         </div>
     }
     else if (active === "destination-url") {
@@ -36,20 +35,18 @@ const Infobox = () => {
                 <h3>Link</h3>
                 <span>Clicks</span>
             </div>
-            <div className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
-                <div className='flex items-center gap-1'>
-                    <img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" alt="" className='w-4' />
-                    <h4 className='text-sm text-gray-900 font-medium'>http://linkedin.pk</h4>
+            {
+                links.map((item, index) => (
+                    <div key={index} className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
+                <div className='flex items-center gap-2'>
+                    <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}`} alt={`favicon:${item.shortId}`} className='w-4' />
+                    <h4 className='text-sm text-gray-900 font-medium'>{item.redirectUrl}</h4>
                 </div>
-                <p className='font-medium text-sm text-gray-700'>03</p>
+                <p className='font-medium text-sm text-gray-700'>{item.visitHistory.length}</p>
             </div>
-            <div className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
-                <div className='flex items-center gap-1'>
-                    <img src="https://www.google.com/s2/favicons?domain=facebook.com&sz=64" alt="" className='w-4' />
-                    <h4 className='text-sm text-gray-900 font-medium'>http://facebook.pk/</h4>
-                </div>
-                <p className='font-medium text-sm text-gray-700'>01</p>
-            </div>
+                ))
+            }
+            
         </div>
     }
     return (
