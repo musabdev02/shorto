@@ -37,7 +37,7 @@ const Link = ({ gridLayout, item, callback }) => {
         <div className={`flex ${gridLayout ? "w-[48%]" : "w-full"} flex-row space-y-0 rounded-lg p-4 transition-all hover:shadow-[0_20px_35px_-15px_rgba(0,0,0,0.1)] items-center border border-gray-300 justify-between`}>
             <div className='flex items-center gap-4'>
                 <div className='hidden sm:flex h-8 w-8 items-center justify-center rounded-lg p-1 border-gray-300 overflow-hidden border bg-gray-50'>
-                    <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}`} alt="icon" className='w-full h-full' />
+                    <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}` || '/logo.svg'} alt="icon" className='w-full h-full' />
                 </div>
                 <div className='flex flex-col gap-2'>
                     <div className='flex items-center gap-1'>
@@ -56,7 +56,7 @@ const Link = ({ gridLayout, item, callback }) => {
             <div className='flex items-center gap-1'>
                 <div className='flex items-center gap-1 text-gray-700 bg-gray-100 border border-gray-200 py-1 px-3 hover:shadow-sm cursor-pointer rounded-lg'>
                     <span className='text-sm'><TbBrandGoogleAnalytics /></span>
-                    <h3 className='text-sm'>{item.visitHistory.length} Clicks</h3>
+                    <h3 className='text-sm'>{item.visitHistory.length.toLocaleString().padStart(0, 1)} Clicks</h3>
                 </div>
                 <span className='text-gray-700 cursor-pointer text-sm' onClick={toggleDropdown}><SlOptionsVertical /></span>
                <DropMenu isOpen={isOpen} dropdownRef={dropdownRef} options={menuOptions} />

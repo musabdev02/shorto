@@ -32,13 +32,12 @@ const Links = () => {
       ];
     // functions
     const triggerUpdate = () => setRefresh(prev => !prev);
-    const handleGridLayout = () => { 
+    const handleGridLayout = () => {
         toggleDropdown();
         isGrid ? setIsGrid(false) : setIsGrid(true);
     };
     const openForm = () => {setForm(true)};
     const closeForm = () => {setForm(false)};
-
 
 
     useEffect(() => {

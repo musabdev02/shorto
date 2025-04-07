@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // icons
 import { FiLink } from "react-icons/fi";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
@@ -30,8 +30,9 @@ const links = [
     }
 ]
 const Sidebar = ({ isOpen, setIsOpen }) => {
-    const sidebarRef = useRef(null);
-
+    const sidebarRef = useRef(null); 
+    const navigate = useNavigate();
+    
     useEffect(() => {
         const handleClickOutside = (event) => {
           if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -46,7 +47,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         return () => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
-      }, [isOpen, setIsOpen]);
+      }, [isOpen, setIsOpen, ]);
+      useEffect(() => {
+        setIsOpen(false)
+      }, [navigate])
 
     return (
         <div ref={sidebarRef} className={`z-9 fixed shadow-lg transform ${isOpen ? "-translate-x-0": "-translate-x-100"} sm:translate-none  transition-all ease-in-out sm:shadow-none sm:block sm:sticky top-0 w-[16rem] bg-[#fafafa] h-screen border-r border-r-[#e5e7eb] overflow-hidden`}>
@@ -60,9 +64,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             <div className='mt-4 p-4 flex flex-col gap-3'>
                 {
                     links.map((item, index) => (
+                        item.name === "Logout" ? <p key={index}  onClick={item.func} className='text-red-400 hover:bg-red-100 py-1 px-2 rounded-md cursor-pointer'>{item.name}</p>:
                         <Link to={item.desti} key={index} className='flex items-center gap-2 cursor-pointer hover:bg-gray-200 p-1 rounded-md'>
                             <span className='text-md text-gray-800'> {item.icon} </span>
-                            <h4 className='text-gray-800' onClick={item.func}>{item.name}</h4>
+                            <h4 className='text-gray-800'>{item.name}</h4>
                         </Link>
                     ))
                 }

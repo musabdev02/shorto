@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
 const Infobox = ({ links }) => {
+    let sortedLinks = links.sort((a, b) => b.visitHistory.length - a.visitHistory.length);
+
     const [active, setActive] = useState("short-links");
     const hoverClasses = "border border-gray-300 font-medium bg-white shadow-md text-black";
     let content;
@@ -15,12 +17,12 @@ const Infobox = ({ links }) => {
                 <span>Clicks</span>
             </div>
             {
-                links.map((item, index) => (
+                sortedLinks.map((item, index) => (
                     <div key={index} className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
                      <div className='flex items-center gap-2'>
                     <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}`} alt={`favicon:${item.shortId}`} className='w-4' />
                     <h4 className='text-sm text-gray-900 font-medium'>localhost:5173/{item.shortId}</h4>
-                     </div>
+                    </div>
                      <p className='font-medium text-sm text-gray-700'>{item.visitHistory.length}</p>
                    </div>
                 ))
@@ -36,7 +38,7 @@ const Infobox = ({ links }) => {
                 <span>Clicks</span>
             </div>
             {
-                links.map((item, index) => (
+                sortedLinks.map((item, index) => (
                     <div key={index} className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
                 <div className='flex items-center gap-2'>
                     <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}`} alt={`favicon:${item.shortId}`} className='w-4' />
