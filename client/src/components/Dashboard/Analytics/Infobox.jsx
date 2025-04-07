@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-
+// helper
+import { truncate, addPrefix } from '../../../helper';
 const Infobox = ({ links }) => {
     let sortedLinks = links.sort((a, b) => b.visitHistory.length - a.visitHistory.length);
 
@@ -19,16 +20,16 @@ const Infobox = ({ links }) => {
             {
                 sortedLinks.map((item, index) => (
                     <div key={index} className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
-                     <div className='flex items-center gap-2'>
-                    <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}`} alt={`favicon:${item.shortId}`} className='w-4' />
-                    <h4 className='text-sm text-gray-900 font-medium'>localhost:5173/{item.shortId}</h4>
+                        <div className='flex items-center gap-2'>
+                            <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}`} alt={`icon:${item.shortId}`} className='w-4' />
+                            <h4 className='text-sm text-gray-900 font-medium'>localhost:5173/{item.shortId}</h4>
+                        </div>
+                        <p className='font-medium text-sm text-gray-700'>{addPrefix( item.visitHistory)}</p>
                     </div>
-                     <p className='font-medium text-sm text-gray-700'>{item.visitHistory.length}</p>
-                   </div>
                 ))
             }
-            
-            
+
+
         </div>
     }
     else if (active === "destination-url") {
@@ -40,15 +41,15 @@ const Infobox = ({ links }) => {
             {
                 sortedLinks.map((item, index) => (
                     <div key={index} className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
-                <div className='flex items-center gap-2'>
-                    <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}`} alt={`favicon:${item.shortId}`} className='w-4' />
-                    <h4 className='text-sm text-gray-900 font-medium'>{item.redirectUrl}</h4>
-                </div>
-                <p className='font-medium text-sm text-gray-700'>{item.visitHistory.length}</p>
-            </div>
+                        <div className='flex items-center gap-2'>
+                            <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}`} alt={`icon:${item.shortId}`} className='w-4' />
+                            <h4 className='text-sm text-gray-900 font-medium'>{truncate(item.redirectUrl, 24)}</h4>
+                        </div>
+                        <p className='font-medium text-sm text-gray-700'>{ addPrefix(item.visitHistory)}</p>
+                    </div>
                 ))
             }
-            
+
         </div>
     }
     return (

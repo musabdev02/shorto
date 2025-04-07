@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useAlert } from '../../contexts/Alert';
 // component
 import ClickChart from '../../components/Dashboard/Analytics/ClickChart'
 import Infobox from '../../components/Dashboard/Analytics/Infobox';
+// helper
+import { addPrefix } from '../../helper';
 const Analytics = () => {
+  const { showAlert } = useAlert();
   const [chartData, setChartData] = useState([]);
   const [totalClicks, setTotalClicks] = useState([]);
   const [links, setLinks] = useState([]);
@@ -26,32 +30,47 @@ const Analytics = () => {
           setLinks(data.urls)
           const generated = generateChartData(allVisits);
           setChartData(generated);
-        };
+        }else{
+          showAlert(`Error: ${data?.message}`, "error")
+        }
         setLoading(false);
-      } catch (err) {
+      } catch (error) {
         setLoading(false)
-        console.error(err);
+        showAlert(`Error: ${error.message}`, "error")
       }
     };
 
     const generateChartData = (history) => {
-      const hours = Array.from({ length: 24 }, (_, i) => {
-        const hourLabel = new Date(0, 0, 0, i).toLocaleTimeString("en-US", {
+      const clickMap = new Map();
+    
+      history.forEach(({ timestamp }) => {
+        const date = new Date(timestamp);
+        const hour = date.getHours();
+        
+        const hourLabel = new Date(0, 0, 0, hour).toLocaleTimeString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
           hour12: true
         });
-        return { time: hourLabel, clicks: 0 };
+    
+        if (!clickMap.has(hourLabel)) {
+          clickMap.set(hourLabel, 0);
+        }
+        clickMap.set(hourLabel, clickMap.get(hourLabel) + 1);
       });
-
-      history.forEach(({ timestamp }) => {
-        const date = new Date(timestamp);
-        const hour = date.getHours();
-        hours[hour].clicks += 1;
-      });
-
-      return hours;
+    
+      
+      const result = Array.from(clickMap.entries()).map(([time, clicks]) => ({
+        time,
+        clicks
+      }));
+    
+      
+      return result.sort((a, b) =>
+        new Date(`1970-01-01 ${a.time}`) - new Date(`1970-01-01 ${b.time}`)
+      );
     };
+    
 
     handleRequest();
   }, []);
@@ -71,7 +90,7 @@ const Analytics = () => {
             <div className='w-full h-full'>
               {/* data */}
               <div className='border border-gray-300 rounded-lg mt-5 sm:mt-12 h-[70vh] py-6 '>
-                <h2 className='text-2xl px-6 font-semibold'>{totalClicks.length} <span className='text-xs text-gray-700 font-light'>Clicks</span></h2>
+                <h2 className='text-2xl px-6 font-semibold'>{addPrefix(totalClicks)} <span className='text-xs text-gray-700 font-light'>Clicks</span></h2>
                 <div className='mt-8 h-[55vh] px-2'>
                   <ClickChart data={chartData} />
                 </div>

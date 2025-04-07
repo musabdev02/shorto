@@ -1,5 +1,5 @@
 
-const logoutRq = async () => {
+const logoutRq = async (callback) => {
     try {
         const res = await fetch(`http://localhost:3000/api/user/logout`, {
             method: "GET",
@@ -12,6 +12,8 @@ const logoutRq = async () => {
         if (data?.status === "ok") {
             localStorage.removeItem("isLoggedIn");
             localStorage.removeItem("name");
+            callback();
+            return data;
         }
     } catch (error) {
         console.log(error);
@@ -37,6 +39,18 @@ const deletelink = async (shortId, callback) => {
         console.log(error);
     }
 
+};
+
+const truncate = (str, len) => {
+    return str.length > len ? str.slice(0, len) + "..." : str;
+};
+
+const addPrefix = (str) => {
+    if(str.length <= 0){
+        return "0"
+    }else{
+        return str.length.toString().padStart(2, "0")
+    }
 }
 
-export { logoutRq, deletelink };
+export { logoutRq, deletelink, truncate, addPrefix };

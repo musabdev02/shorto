@@ -5,12 +5,14 @@ import Sidebar from '../components/Dashboard/Sidebar'
 import { LuPanelLeft } from "react-icons/lu";
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+  const triggerUpdate = () => setRefresh(prev => !prev);
   const openSideBar = () => {
     setIsOpen(true)
   }
   return (
     <div className='flex'>
-        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
+        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} callback={triggerUpdate}/>
         <div className='px-4 sm:px-14 py-6 w-full overflow-y-hidden'>
             <div onClick={openSideBar} className='sm:hidden text-lg mb-2'><LuPanelLeft /></div>
             <Outlet />

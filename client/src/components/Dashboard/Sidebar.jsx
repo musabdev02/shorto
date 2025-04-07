@@ -4,34 +4,39 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FiLink } from "react-icons/fi";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { CiSettings } from "react-icons/ci";
-import { FaUserAltSlash } from "react-icons/fa";
 // helper
 import { logoutRq } from '../../helper';
-const links = [
-    {
-        icon: <FiLink />,
-        name: "Links",
-        desti: "/dashboard"
-    },
-    {
-        icon: <TbBrandGoogleAnalytics />,
-        name: "Analytics",
-        desti: "/dashboard/analytics"
-    },
-    {
-        icon: <CiSettings />,
-        name: "Settings",
-        desti: "/dashboard/settings"
-    },
-    {
-        name: "Logout",
-        desti: "/",
-        func: () => logoutRq()
-    }
-]
-const Sidebar = ({ isOpen, setIsOpen }) => {
+
+const Sidebar = ({ isOpen, setIsOpen, callback }) => {
     const sidebarRef = useRef(null); 
     const navigate = useNavigate();
+
+    const links = [
+        {
+            icon: <FiLink />,
+            name: "Links",
+            desti: "/dashboard"
+        },
+        {
+            icon: <TbBrandGoogleAnalytics />,
+            name: "Analytics",
+            desti: "/dashboard/analytics"
+        },
+        {
+            icon: <CiSettings />,
+            name: "Settings",
+            desti: "/dashboard/settings"
+        },
+        {
+            name: "Logout",
+            desti: "/",
+            func: () => logoutAndUpdate()
+        }
+    ];
+    const logoutAndUpdate = async () => {
+        await logoutRq(callback);
+        navigate("/")
+    };
     
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -48,12 +53,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, [isOpen, setIsOpen, ]);
-      useEffect(() => {
-        setIsOpen(false)
-      }, [navigate])
+      useEffect(() => {setIsOpen(false);}, [navigate])
 
     return (
-        <div ref={sidebarRef} className={`z-9 fixed shadow-lg transform ${isOpen ? "-translate-x-0": "-translate-x-100"} sm:translate-none  transition-all ease-in-out sm:shadow-none sm:block sm:sticky top-0 w-[16rem] bg-[#fafafa] h-screen border-r border-r-[#e5e7eb] overflow-hidden`}>
+        <div ref={sidebarRef} className={`z-9 fixed shadow-lg transform ${isOpen ? "-translate-x-0": "-translate-x-100"} sm:translate-none  transition-all ease-in-out sm:shadow-none sm:block sm:sticky top-0 w-[18rem] bg-[#fafafa] h-screen border-r border-r-[#e5e7eb] overflow-hidden`}>
             <div className='p-4 flex items-center gap-2'>
                 <div className='rounded-md h-7 w-7 shadow-sm bg-white'>
                     <img src="/logo.svg" alt="logo" className='w-full h-full' />

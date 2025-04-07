@@ -12,6 +12,8 @@ import { PiLinkSimpleBold } from "react-icons/pi";
 import { FiGrid } from "react-icons/fi";
 import { PiCodesandboxLogoThin } from "react-icons/pi";
 import { CiBoxList } from "react-icons/ci";
+// helper
+import { addPrefix } from '../../helper';
 const Links = () => {
     const { showAlert } = useAlert();
     const navigate = useNavigate();
@@ -71,15 +73,13 @@ const Links = () => {
     }, [isForm, refresh])
 
 
-
-
     return (
         <div className=''>
             <h3 className='text-xl font-medium'>Links</h3>
             <div className='mt-5 sm:mt-10 flex justify-end gap-2'>
                 <div className='flex border border-gray-300 px-4 gap-2 items-center rounded-md text-gray-700' title='Total Links'>
                     <PiLinkSimpleBold />
-                    {userLinks.length}
+                    {addPrefix(userLinks)}
                 </div>
                <span onClick={openForm}><Button content={"Create Link"} type={"secondary"} icon={"plus"} /></span>
                 <div className='hidden sm:flex border border-gray-300 items-center px-3 hover:bg-gray-100 text-gray-700 rounded-md
@@ -96,7 +96,6 @@ const Links = () => {
                         <p className='text-zinc-500'>Loading...</p>
                     </div>
                 ) : hasLinks ? (
-                    // Show links if available
                     <div className={`mt-8 flex ${isGrid ? "flex-row flex-wrap" : "flex-col"} gap-4`}>
                         {
                             userLinks.slice(0).reverse().map((item, index) => (
