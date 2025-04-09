@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+const apiUrl = import.meta.env.VITE_API_URL;
 // icons
 import { IoCloseSharp } from "react-icons/io5";
 // component
@@ -32,7 +33,7 @@ const Form = ({ closeForm }) => {
     };
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:3000/api/user/url`, {
+      const res = await fetch(`${apiUrl}/api/user/url`, {
         method: "POST",
         credentials: "include",
         headers: {

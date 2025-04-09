@@ -1,13 +1,17 @@
 import React, { useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+// components
+import { useAlert } from '../../contexts/Alert';
 // icons
 import { FiLink } from "react-icons/fi";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { CiSettings } from "react-icons/ci";
+import { FaGithub } from "react-icons/fa";
 // helper
 import { logoutRq } from '../../helper';
 
 const Sidebar = ({ isOpen, setIsOpen, callback }) => {
+    const { showAlert } = useAlert();
     const sidebarRef = useRef(null); 
     const navigate = useNavigate();
 
@@ -34,6 +38,7 @@ const Sidebar = ({ isOpen, setIsOpen, callback }) => {
         }
     ];
     const logoutAndUpdate = async () => {
+        showAlert("You're now logged out. See you again!", "success");
         await logoutRq(callback);
         navigate("/")
     };
@@ -75,6 +80,10 @@ const Sidebar = ({ isOpen, setIsOpen, callback }) => {
                     ))
                 }
 
+            </div>
+            <div className='absolute bottom-5 left-2'>
+                <a href='https://github.com/musabdev02/shorto' target='_blank' className='flex items-center gap-1 mt-2 text-gray-700'><span><FaGithub /></span>Code</a>
+                <p className='text-zinc-700'> &copy; {new Date().getFullYear()} Created by <a target='_blank' href="https://github.com/musabdev02" className='hover:text-blue-400'>Musab</a></p>
             </div>
         </div>
     )

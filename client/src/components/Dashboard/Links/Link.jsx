@@ -1,4 +1,5 @@
 import React from 'react'
+const siteName = import.meta.env.VITE_SITE_NAME;
 import { useNavigate } from 'react-router-dom';
 // component
 import { DropMenu, useDropdown } from "../../UI/Dropdown"
@@ -19,7 +20,7 @@ const Link = ({ gridLayout, item, callback }) => {
 
     const menuOptions = [
          { label: "View Analytics", icon: <TbBrandGoogleAnalytics />, onClick: () => navigate("/dashboard/analytics") },
-         { label: "Copy link", icon: <IoIosLink />, onClick: () => copyToClipboard(`http://localhost:5173/${item.shortId}`) },
+         { label: "Copy link", icon: <IoIosLink />, onClick: () => copyToClipboard(`${siteName}/${item.shortId}`) },
          { label: "Delete", icon: <MdDeleteOutline />, onClick: () => removeLink() },
     ];
     const copyToClipboard = (text) => {
@@ -41,9 +42,9 @@ const Link = ({ gridLayout, item, callback }) => {
                 </div>
                 <div className='flex flex-col gap-2'>
                     <div className='flex items-center gap-1'>
-                        <h3 className='text-sm text-gray-900 font-medium'>localhost/{item.shortId}</h3>
+                        <h3 className='text-sm text-gray-900 font-medium'>{siteName}/{item.shortId}</h3>
                         <span className='cursor-pointer text-sm text-gray-700'
-                         onClick={() => copyToClipboard(`http://localhost:5173/${item.shortId}`)}
+                         onClick={() => copyToClipboard(`${siteName}/${item.shortId}`)}
                          ><FaRegCopy /></span>
                          <p className='text-xs text-zinc-700 ml-2'>{item?.comment}</p>
                     </div>

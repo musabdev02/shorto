@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+const apiUrl = import.meta.env.VITE_API_URL;
 import { Link, useNavigate } from 'react-router-dom'
 // components
 import { useAlert } from '../contexts/Alert';
@@ -35,7 +36,7 @@ const Login = () => {
     setLoading(true)
 
     try {
-      const res = await fetch(`http://localhost:3000/api/user/verify`, {
+      const res = await fetch(`${apiUrl}/api/user/verify`, {
         method: "POST",
         credentials: "include",
         headers: {

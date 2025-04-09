@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
+const apiUrl = import.meta.env.VITE_API_URL;
 import { useNavigate, useLocation } from 'react-router-dom';
 import Rlr from "../components/Rlr"
 const Redirector = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  let url = `http://localhost:3000/api/url${location.pathname}`;
+  let url = `${apiUrl}/api/url${location.pathname}`;
   useEffect(() => {
     if(isLoggedIn){
-      url = `http://localhost:3000/api/user/url${location.pathname}`;
+      url = `${apiUrl}/user/url${location.pathname}`;
     }
     const handleRedirector = async () => {
       try {

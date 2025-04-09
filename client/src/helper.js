@@ -1,7 +1,7 @@
-
+const apiUrl = import.meta.env.VITE_API_URL;
 const logoutRq = async (callback) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/user/logout`, {
+        const res = await fetch(`${apiUrl}/api/user/logout`, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -23,7 +23,7 @@ const logoutRq = async (callback) => {
 const deletelink = async (shortId, callback) => {
 
     try {
-        const res = await fetch(`http://localhost:3000/api/user/url/`, {
+        const res = await fetch(`${apiUrl}/api/user/url/`, {
             method: "DELETE",
             credentials: "include",
             headers: {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+const apiUrl = import.meta.env.VITE_API_URL;
 import { Link, useNavigate } from 'react-router-dom'
 // components
 import { useAlert } from '../contexts/Alert';
@@ -53,7 +54,7 @@ const Register = () => {
 
     setLoading(true)
     try {
-      const res = await fetch(`http://localhost:3000/api/user`, {
+      const res = await fetch(`${apiUrl}/api/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

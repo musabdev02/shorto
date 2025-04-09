@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+const apiUrl = import.meta.env.VITE_API_URL;
 import { useNavigate } from 'react-router-dom';
 // component
 import { useAlert } from '../../contexts/Alert';
@@ -45,7 +46,7 @@ const Links = () => {
     useEffect(() => {
         const handleRequest = async () => {
             try {
-                const res = await fetch(`http://localhost:3000/api/user/profile`, {
+                const res = await fetch(`${apiUrl}/api/user/profile`, {
                     method: "GET",
                     credentials: "include",
                     headers: {

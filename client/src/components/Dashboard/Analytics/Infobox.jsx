@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+const siteName = import.meta.env.VITE_SITE_NAME;
 // helper
 import { truncate, addPrefix } from '../../../helper';
 const Infobox = ({ links }) => {
@@ -22,7 +23,7 @@ const Infobox = ({ links }) => {
                     <div key={index} className='mt-3 border-t border-gray-300 pt-3 flex justify-between'>
                         <div className='flex items-center gap-2'>
                             <img src={`https://www.google.com/s2/favicons?sz=64&domain_url=${item.redirectUrl}`} alt={`icon:${item.shortId}`} className='w-4' />
-                            <h4 className='text-sm text-gray-900 font-medium'>localhost:5173/{item.shortId}</h4>
+                            <h4 className='text-sm text-gray-900 font-medium'>{siteName}/{item.shortId}</h4>
                         </div>
                         <p className='font-medium text-sm text-gray-700'>{addPrefix( item.visitHistory)}</p>
                     </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+const apiUrl = import.meta.env.VITE_API_URL;
 import { useNavigate } from "react-router-dom"
 // cus
 import { useAlert } from '../../../contexts/Alert';
@@ -34,7 +35,7 @@ const Url = () => {
         
         setLoading(true);
         try{
-            const res = await fetch(`http://localhost:3000/api/url`, {
+            const res = await fetch(`${apiUrl}/api/url`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

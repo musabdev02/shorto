@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+const apiUrl = import.meta.env.VITE_API_URL;
 import { useAlert } from '../../contexts/Alert';
 // component
 import ClickChart from '../../components/Dashboard/Analytics/ClickChart'
@@ -16,7 +17,7 @@ const Analytics = () => {
     setLoading(true)
     const handleRequest = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/user/url/`, {
+        const res = await fetch(`${apiUrl}/api/user/url/`, {
           method: "GET",
           credentials: "include",
           headers: {

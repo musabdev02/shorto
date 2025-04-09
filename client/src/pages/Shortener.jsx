@@ -1,4 +1,5 @@
 import React from 'react'
+const siteName = import.meta.env.VITE_SITE_NAME;
 import { useLocation } from 'react-router-dom';
 // icons
 import { IoMdLink } from "react-icons/io";
@@ -25,9 +26,9 @@ const Shortener = () => {
                 <div className='w-full border border-gray-200 mt-4 h-12 rounded-md bg-white shadow-xs flex items-center justify-between px-2'>
                     <div className='px-2 flex items-center gap-4 w-[90%]'>
                         <span className='text-gray-600'><IoMdLink /></span>
-                        <input type="text" readOnly={true} value={`http://localhost:5173/${state.shortId}`} className='outline-none w-full cursor-pointer text-gray-700 text-sm sm:text-md' />
+                        <input type="text" readOnly={true} value={`${siteName}/${state.shortId}`} className='outline-none w-full cursor-pointer text-gray-700 text-sm sm:text-md' />
                     </div>
-                  <span onClick={() => copyToClipboard(`http://localhost:5173/${state.shortId}`)}><Button type={"primary"} content={"Copy"} /></span>
+                  <span onClick={() => copyToClipboard(`${siteName}/${state.shortId}`)}><Button type={"primary"} content={"Copy"} /></span>
                 </div>
                 <div className='text-left mt-4'>
                     <h3 className='text-gray-600 text-sm sm:text-md'>Original Link: <span className='text-blue-400 hover:underline cursor-pointer'>{state.originalUrl}</span></h3>
