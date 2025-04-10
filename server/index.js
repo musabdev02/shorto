@@ -13,10 +13,10 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
-connectToDb(process.env.MONGO_URL_LOCAL);
+connectToDb(process.env.MONGO_URL);
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.SITE_NAME,
     credentials: true
 }));
 app.use(express.urlencoded({ extended: false }));

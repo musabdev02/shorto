@@ -9,7 +9,7 @@ const Redirector = () => {
   let url = `${apiUrl}/api/url${location.pathname}`;
   useEffect(() => {
     if(isLoggedIn){
-      url = `${apiUrl}/user/url${location.pathname}`;
+      url = `${apiUrl}/api/user/url${location.pathname}`;
     }
     const handleRedirector = async () => {
       try {
